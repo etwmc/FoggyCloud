@@ -1,0 +1,17 @@
+{
+  "name": "darkcloud",
+  "version": "1.0.0",
+  "description": "DarkCloud is a prototype on fully encrypted cloud storage model, which any data preserved within the system would be fully encrypted, from data insertion, transmitting between users and backend, archieving, to rebuild databases on new devices, the data will be encrypted either by AES256, or RSA, while still provide flexible features, from data read/write, to feedback for machine learning, all without the chance for privacy \"leakage\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wai Man Chan",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^6.0.52"
+  },
+  "dependencies": {
+    "@types/node": "^6.0.52"
+  }
+}

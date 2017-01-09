@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>CloudValue_Sqlite.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>Decryptor.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>PartialDecryptTest.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>SQLiteTest.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>databaseMerger.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>335ACB901E15CB5B00E5136B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>335ACBA11E160D1100E5136B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>335FC7B51E2372630064A60A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>33E886601DF0389600C2833D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>33FECD791E1863DA009D5959</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
