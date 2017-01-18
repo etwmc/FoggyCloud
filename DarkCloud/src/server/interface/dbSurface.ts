@@ -108,11 +108,6 @@ function handleRequest(request: http.IncomingMessage, response: http.ServerRespo
         }
         case '/snapshot': {
             switch (request.method) {
-                case 'POST': {
-                    //Verification is needed
-                    //Then, get the signature and device id
-                    break;
-                }
                 case 'PUT': {
                     //Vertification is done in the snapshot sub-routine
                     //Upload the snapshot

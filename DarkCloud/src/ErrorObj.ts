@@ -15,3 +15,5 @@ export class ErrorObj {
         return this.causityChain.reduce((previousValue: string, currentValue: string) => previousValue+"->"+currentValue)+": "+this.errorMsg;
     }
 }
+
+export declare type rollbackHandler = () => void;
