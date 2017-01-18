@@ -1,5 +1,7 @@
 DarkCloud is the backend of the FoggyCloud project. It handles the logistic of message passing (and pushing when you implement), public key sharing and encrypted snapshot storage. 
 
+Run: node ./build/server/interface/dbSurface.js
+
 There is 5 RESTful functions: 
 
 #/init
@@ -62,3 +64,5 @@ Method: GET
 Parameter: uid: User ID in UUID form
 Body: None
 Return: 
+Header: Offset, Version
+Body: Snapshot
