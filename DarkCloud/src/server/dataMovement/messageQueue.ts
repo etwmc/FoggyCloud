@@ -15,7 +15,7 @@ export function getPublicKey(userID: string) {
     return jsonDict['PubKey'];
 }
 
-class msgVersion {
+export class msgVersion {
     revision: number = 0;
     offset: number = 0;
 }

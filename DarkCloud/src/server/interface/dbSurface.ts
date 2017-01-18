@@ -4,6 +4,7 @@ import * as url from 'url';
 import * as msgQueue from "../dataMovement/messageQueue"
 import * as snapshot from "../dataMovement/snapshot"
 import * as userControl from "../userManagment/userControl"
+import * as dataIO from "../dataMovement/dataIO"
 
 const surfacePort = 49204;
 
@@ -125,6 +126,11 @@ function handleRequest(request: http.IncomingMessage, response: http.ServerRespo
                             if (err) {
                                 response.statusCode = 500;
                             } else {
+                                //Store version
+                                var v = new msgQueue.msgVersion;
+                                v.revision = requestURL.query['ver'];
+                                v.offset = requestURL.query['offset'];
+                                dataIO.completeRewrite(userID, "snapshot.ver", new Buffer(v.toString()), (err)=>{});
                                 response.statusCode = 204;
                             }
                             response.end();
@@ -147,11 +153,22 @@ function handleRequest(request: http.IncomingMessage, response: http.ServerRespo
                     snapshot.fetchSnapshot(userID, (err, buffer) => {
                         if (err) {
                             response.statusCode = 500;
+                            response.end();
                         } else {
-                            response.statusCode = 200;
-                            response.write(buffer);
+                            dataIO.completeRead(userID, "snapshot.ver", (data, err)=>{
+                                if (err) {
+                                    response.statusCode = 500;
+                                    response.end();
+                                } else {
+                                    const v: msgQueue.msgVersion =  JSON.parse(data.toString('utf8'));
+                                    response.setHeader("Version", v.revision.toString());
+                                    response.setHeader("Offset", v.offset.toString());
+                                    response.statusCode = 200;
+                                    response.write(buffer);
+                                    response.end();
+                                }
+                            })
                         }
-                        response.end();
                     });
                     return;
                 }
