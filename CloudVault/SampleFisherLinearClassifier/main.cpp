@@ -7,8 +7,11 @@
 //
 
 #include <stdio.h>
+#include <random>
 
-#include <CloudVault.h>
+extern "C" {
+    #include <CloudVault.h>
+}
 
 static int callback(void *NotUsed, int argc, char **argv, char **azColName){
     int i;
@@ -29,7 +32,7 @@ int main(int argc, const char * argv[]) {
     
     encryptionSqliteInit();
     
-    rc |= encryptSqlite3_open("sampleData.db", &db);
+    rc |= encryptSqlite3_open("sampleData.ec.db", &db);
     if( rc ){
         fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
         return(0);
@@ -51,21 +54,77 @@ int main(int argc, const char * argv[]) {
     
     "val2x0 REAL,"\
     "val2x1 REAL,"\
-    "val2x2 REAL);";
+    "val2x2 REAL,"\
+    
+    "type INTEGER);";
     
     rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
     if( rc != SQLITE_OK ){
-        fprintf(stderr, "INSERT SQL error: %s\n", zErrMsg);
+        fprintf(stderr, "DB SQL error: %s\n", zErrMsg);
         sqlite3_free(zErrMsg);
     }else{
-        fprintf(stdout, "Records created successfully\n");
+        fprintf(stdout, "DB created successfully\n");
     }
     
-    for (int i = 0; i < 100; i++) {
+    /*sql = "PRAGMA schema.wal_checkpoint;";
+    //rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
+    if( rc != SQLITE_OK ){
+        fprintf(stderr, "DB SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+    }else{
+        fprintf(stdout, "DB created successfully\n");
+    }*/
+    
+    const double sd = 0.0;
+    
+    std::default_random_engine _randomGenerator;
+    std::random_device rd;
+    _randomGenerator.seed(rd());
+    std::normal_distribution<double> _distribution(0, 10);
+    
+    //Generate center
+    double VectorA[9];
+    double VectorB[9];
+    for (int i = 0; i < 9; i++) {
+        VectorA[i] = _distribution(_randomGenerator);
+    }
+    for (int i = 0; i < 9; i++) {
+        VectorB[i] = _distribution(_randomGenerator);
+    }
+    
+    srand(time(NULL));
+    
+    _distribution = std::normal_distribution<double>(0, 0.1);
+    char *insertSQLFormat = "INSERT INTO image_3x3 "  \
+    "VALUES ( NULL, %f, %f, %f, %f, %f, %f, %f, %f, %f, %d ); ";
+    for (int i = 0; i < 100000; i++) {
         double vector[9];
+        bool useVersionA = ((double)rand())/RAND_MAX > 0.5;
+        double *chosenVector = useVersionA? VectorA: VectorB;
         for (int j = 0; j <9; j++) {
-            vector[j] = 
+            double noise = _distribution(_randomGenerator);
+            vector[j] = chosenVector[j]+noise;
         }
+        char insertSQL[1024];
+        snprintf(insertSQL, 1024, insertSQLFormat, vector[0], vector[1], vector[2]
+                 , vector[3], vector[4], vector[5]
+                 , vector[6], vector[7], vector[8], (int)useVersionA );
+        rc = sqlite3_exec(db, insertSQL, callback, 0, &zErrMsg);
+        if( rc != SQLITE_OK ){
+            fprintf(stderr, "INSERT SQL error: %s\n", zErrMsg);
+            sqlite3_free(zErrMsg);
+        }else{
+            //fprintf(stdout, "Records INSERT successfully\n");
+        }
+    }
+    
+    char *deleteAllData = "DELETE FROM image_3x3;";
+    rc = sqlite3_exec(db, deleteAllData, callback, 0, &zErrMsg);
+    if( rc != SQLITE_OK ){
+        fprintf(stderr, "DELETE SQL error: %s\n", zErrMsg);
+        sqlite3_free(zErrMsg);
+    }else{
+        fprintf(stdout, "Records DELETE successfully\n");
     }
     
     sqlite3_close(db);

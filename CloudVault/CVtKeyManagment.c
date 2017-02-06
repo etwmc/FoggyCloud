@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "EncryptionBlocker.h"
+#include <sys/stat.h>
 
 extern int symmetryKeySize;
 extern int asymmetryKeySize;
@@ -17,12 +18,15 @@ extern int asymmetryKeySize;
 bool keybagExist(const char* addr) {
     char*keybag = (char*)malloc(sizeof(char)*4096);
     snprintf(keybag, 4096, "%s.keybag", addr);
-    FILE *f = fopen(keybag, "r");
+    
+    struct stat stat_buf;
+    int rc = stat(keybag, &stat_buf);
+    
     free(keybag);
-    if (f == NULL) return false;
-    int eof = feof(f);
-    fclose(f);
-    return !eof;
+    
+    int fileSize = rc == 0 ? stat_buf.st_size : -1;
+    
+    return fileSize > 0;
 }
 
 size_t copyMasterKey_self(const char *addr, const char *buffer) {
