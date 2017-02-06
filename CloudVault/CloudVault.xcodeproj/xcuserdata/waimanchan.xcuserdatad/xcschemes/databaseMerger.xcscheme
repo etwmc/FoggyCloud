@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "./test.db"
+            argument = "./sampleData.db"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

@@ -16,5 +16,6 @@ void encryptionSqliteInit();
 
 int encryptSqlite3_open(const char *filename, sqlite3 **ppDb);
 int encryptSqlite3_open_v2(const char *filename, sqlite3 **ppDb, int flags, const char *zVfs);
+void encryptSqlite3_Merger(const char *addr);
 
 #endif /* DeltaPager_h */

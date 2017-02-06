@@ -13,6 +13,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <fcntl.h>
+#include <sys/mman.h>
 
 typedef struct {
     sqlite3_io_methods *method;
@@ -23,9 +25,17 @@ typedef struct {
     //Modified bits
     FILE *bitMapFile;
     bool *modifiedBit;
+    bool bitDirty;
     //Encryption
     const char *key;
     unsigned int keySize;
+    //File address
+    char addr[4096];
+    //Encryption Bypass
+    /*
+     Due to the cost of encryption, if the file is temporary (journal/wal), it will not encrypted
+     */
+    bool passThr;
 } encryptFile;
 
 typedef struct {

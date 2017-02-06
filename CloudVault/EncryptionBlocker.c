@@ -132,8 +132,23 @@ int lowLevelMaskingEncrypt(const char *key, unsigned int keySize, const char *ma
     SecKeyRef keyRef = keyFromChar(key, keySize);
     
     char *xorResult = malloc(sizeof(char)*inputSize);
-    for (int i = 0; i < inputSize; i++) {
+    for (int i = 0; i < inputSize; i+=16) {
         xorResult[i] = input[i] ^ mask[i];
+        xorResult[i+1] = input[i+1] ^ mask[i+1];
+        xorResult[i+2] = input[i+2] ^ mask[i+2];
+        xorResult[i+3] = input[i+3] ^ mask[i+3];
+        xorResult[i+4] = input[i+4] ^ mask[i+4];
+        xorResult[i+5] = input[i+5] ^ mask[i+5];
+        xorResult[i+6] = input[i+6] ^ mask[i+6];
+        xorResult[i+7] = input[i+7] ^ mask[i+7];
+        xorResult[i+8] = input[i+8] ^ mask[i+8];
+        xorResult[i+9] = input[i+9] ^ mask[i+9];
+        xorResult[i+10] = input[i+10] ^ mask[i+10];
+        xorResult[i+11] = input[i+11] ^ mask[i+11];
+        xorResult[i+12] = input[i+12] ^ mask[i+12];
+        xorResult[i+13] = input[i+13] ^ mask[i+13];
+        xorResult[i+14] = input[i+14] ^ mask[i+14];
+        xorResult[i+15] = input[i+15] ^ mask[i+15];
     }
     
     CCCryptorStatus status;
@@ -160,8 +175,23 @@ int lowLevelMaskingDecrypt(const char *key, unsigned int keySize, const char *ma
     assert(status == kCCSuccess);
     assert(decryptedSize == inputSize);
     
-    for (int i = 0; i < inputSize; i++) {
+    for (int i = 0; i < inputSize; i+=16) {
         output[i] = output[i] ^ mask[i];
+        output[i+1] = output[i+1] ^ mask[i+1];
+        output[i+2] = output[i+2] ^ mask[i+2];
+        output[i+3] = output[i+3] ^ mask[i+3];
+        output[i+4] = output[i+4] ^ mask[i+4];
+        output[i+5] = output[i+5] ^ mask[i+5];
+        output[i+6] = output[i+6] ^ mask[i+6];
+        output[i+7] = output[i+7] ^ mask[i+7];
+        output[i+8] = output[i+8] ^ mask[i+8];
+        output[i+9] = output[i+9] ^ mask[i+9];
+        output[i+10] = output[i+10] ^ mask[i+10];
+        output[i+11] = output[i+11] ^ mask[i+11];
+        output[i+12] = output[i+12] ^ mask[i+12];
+        output[i+13] = output[i+13] ^ mask[i+13];
+        output[i+14] = output[i+14] ^ mask[i+14];
+        output[i+15] = output[i+15] ^ mask[i+15];
     }
     
     return 0;

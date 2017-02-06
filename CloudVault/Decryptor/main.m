@@ -15,15 +15,16 @@
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    NSString *addr = [@"./test.db.store" stringByExpandingTildeInPath];
+    NSString *filename = [[NSString alloc] initWithFormat:@"%s.store", argv[1]];
+    NSString *addr = [filename stringByExpandingTildeInPath];
     NSData *data = [NSData dataWithContentsOfFile:addr];
     char key[32];
-    copyMasterKey_self("./test.db", key);
+    copyMasterKey_self(argv[1], key);
     char zero[16];
     bzero(zero, 16);
     char *output = malloc(sizeof(char)*data.length);
     lowLevelDecrypt(key, 32, zero, 16, data.bytes, data.length, output);
     NSData *dec = [NSData dataWithBytesNoCopy:output length:data.length];
-    [dec writeToFile:[addr stringByAppendingPathExtension:@"expand"] atomically:true];
+    [dec writeToFile:[addr stringByAppendingPathExtension:@"expand.db"] atomically:true];
     return 0;
 }

@@ -62,7 +62,17 @@ int randomEncrypt(void *fd, const char *key, unsigned int keySize, char *plainte
     char *tmpPage = malloc(sizeof(char)*pageSize);
     
     //Read the contents
-    if (plaintextSize != pageSize) randomDecrypt(fd, key, keySize, tmpPage, pageOffset, pageSize, origReader, newTextReader);
+    if (plaintextSize != pageSize) {
+        //randomDecrypt(fd, key, keySize, tmpPage, pageOffset, pageSize, origReader, newTextReader);
+        /**/
+         
+         //Pad front
+         randomDecrypt(fd, key, keySize, tmpPage, pageOffset, offset-pageOffset, origReader, newTextReader);
+         //Pad back
+         randomDecrypt(fd, key, keySize, tmpPage+(offset-pageOffset)+plaintextSize, offset+plaintextSize, (pageSize-plaintextSize)-(offset-pageOffset), origReader, newTextReader);
+         
+         /**/
+    }
     
     //Replace the content
     bcopy(plaintext, tmpPage+(offset-pageOffset), plaintextSize);
@@ -131,7 +141,17 @@ int deltaEncrypt(void *fd, const char *key, unsigned int keySize, char *plaintex
     unsigned int readSize;
     
     //Read the contents
-    if (plaintextSize != pageSize) randomDecrypt(fd, key, keySize, tmpPage, pageOffset, pageSize, origReader, newTextReader);
+    if (plaintextSize != pageSize) {
+        //randomDecrypt(fd, key, keySize, tmpPage, pageOffset, pageSize, origReader, newTextReader);
+        /**/
+        
+        //Pad front
+        randomDecrypt(fd, key, keySize, tmpPage, pageOffset, offset-pageOffset, origReader, newTextReader);
+        //Pad back
+        randomDecrypt(fd, key, keySize, tmpPage+(offset-pageOffset)+plaintextSize, offset+plaintextSize, (pageSize-plaintextSize)-(offset-pageOffset), origReader, newTextReader);
+        
+        /**/
+    }
     
     //Replace the content
     bcopy(plaintext, tmpPage+(offset-pageOffset), plaintextSize);

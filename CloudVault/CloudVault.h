@@ -15,5 +15,6 @@ int asymmetryKeySize = 512;
 #include <EncryptionBlocker.h>
 #include <CVtKeyManagment.h>
 #include <DeltaPager.h>
+#include <CVPerceptron.h>
 
 #endif /* CloudVault_h */

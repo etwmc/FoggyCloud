@@ -14,7 +14,8 @@
 #include "CloudVault.h"
 #include "DeltaPager_Priv.h"
 #include <assert.h>
-
+#include <unistd.h>
+#include <sys/stat.h>
 
 //VFS functions
 #define underlyingVFS ((encrypedVFS*)vfs)->underneathVFS
@@ -22,6 +23,14 @@
 #define modifingFile ((encryptFile*)file)->modifyFile
 
 extern sqlite3_io_methods encryptedMethod;
+
+bool fileIsTemp(const char *zName) {
+    size_t len = strlen(zName);
+    if (zName[len-4] == '-' && zName[len-3] == 'w' && zName[len-2] == 'a' && zName[len-1] == 'l') return true;
+    if (zName[len-8] == '-' && zName[len-7] == 'j' && zName[len-6] == 'o' && zName[len-6] == 'u'&&
+        zName[len-8] == 'r' && zName[len-7] == 'n' && zName[len-6] == 'a' && zName[len-6] == 'l') return true;
+    return false;
+}
 
 //Mapping service
 void loadBitmap(encryptFile *file) {
@@ -35,14 +44,18 @@ void loadBitmap(encryptFile *file) {
         for (int i = ret; i < file->actualFileSize/16; i++)
             file->modifiedBit[i] = false;
     }
+    file->bitDirty = false;
 }
 
 void saveBitmap(encryptFile *file) {
     //Get actual size, so map
     //Because of page schema, the file size will be an integer of the (blockSize * 8)
-    fseek(file->bitMapFile, 0, SEEK_SET);
-    fwrite(file->modifiedBit, sizeof(bool), file->actualFileSize/16, file->bitMapFile);
-    fflush(file->bitMapFile);
+    if (file->bitDirty) {
+        fseek(file->bitMapFile, 0, SEEK_SET);
+        fwrite(file->modifiedBit, sizeof(bool), file->actualFileSize/16, file->bitMapFile);
+        fflush(file->bitMapFile);
+        file->bitDirty = false;
+    }
 }
 
 void growBitmap(encryptFile *file, sqlite_int64 newSize) {
@@ -53,6 +66,11 @@ void growBitmap(encryptFile *file, sqlite_int64 newSize) {
     }
     free(file->modifiedBit);
     file->modifiedBit = newVector;
+    
+    if (ftruncate(fileno(file->bitMapFile), newSize/16) != 0) {
+        file->bitDirty = true;
+    }
+    
 }
 
 void updateBitmap(encryptFile *file, sqlite_int64 offset, int amount) {
@@ -61,6 +79,7 @@ void updateBitmap(encryptFile *file, sqlite_int64 offset, int amount) {
     int amountDiv4 = amount/16;
     bool *bit = file->modifiedBit;
     for (int i = 0; i < amountDiv4; i++) {
+        if (!file->bitDirty && bit[i+offsetDiv4] != true) file->bitDirty = true;
         bit[i+offsetDiv4] = true;
     }
 }
@@ -90,19 +109,33 @@ int encryptOpen(sqlite3_vfs* vfs, const char *zName, sqlite3_file* file, int fla
     sqlite3_file *deltaFile = (sqlite3_file*)malloc(size);
     bzero(rootFile, size);
     
+    //Initial underneath vfs
+    int resNo = underlyingVFS->xOpen(underlyingVFS, zName, rootFile, flags, pOutFlags);
+    
+    if (resNo == SQLITE_OK) {
+        //Sucess, so continuous initial
+        ((encryptFile*)file)->actualFile = rootFile;
+        rootFile->pMethods->xFileSize(rootFile, &((encryptFile*)file)->actualFileSize);
+        ((encryptFile*)file)->method = &encryptedMethod;
+        ((encryptFile*)file)->pVfs = vfs;
+    }
+    
+    //Copy name
+    strncpy(((encryptFile*)file)->addr, zName, 4096);
+    
+    //Test file type
+    ((encryptFile*)file)->passThr = fileIsTemp(zName);
+    if ( ((encryptFile*)file)->passThr ) return resNo;
+    
     //New address: zName.delta
     int newAddrLen = strlen(zName)+7;
     char *newAddr = malloc(sizeof(char)*newAddrLen);
     bcopy(zName, newAddr, strlen(zName));
     bcopy(".delta", newAddr+strlen(zName), 7);
     
-    //Initial underneath vfs
-    int resNo = underlyingVFS->xOpen(underlyingVFS, zName, rootFile, flags, pOutFlags);
+    //Initial delta
     resNo |= underlyingVFS->xOpen(underlyingVFS, newAddr, deltaFile, flags, pOutFlags);
     if (resNo == SQLITE_OK) {
-        //Sucess, so continuous initial
-        ((encryptFile*)file)->actualFile = rootFile;
-        rootFile->pMethods->xFileSize(rootFile, &((encryptFile*)file)->actualFileSize);
         
         //Get actual size, so map
         ((encryptFile*)file)->modifiedBit = malloc(sizeof(bool)*((encryptFile*)file)->actualFileSize/4);
@@ -117,22 +150,21 @@ int encryptOpen(sqlite3_vfs* vfs, const char *zName, sqlite3_file* file, int fla
         }
         ((encryptFile*)file)->bitMapFile = f;
         loadBitmap(file);
-        f = fopen(newAddr, "w+");
+        f = fopen(newAddr, "r+");
         ((encryptFile*)file)->bitMapFile = f;
         saveBitmap(file);
         
         ((encryptFile*)file)->modifyFile = deltaFile;
-        ((encryptFile*)file)->method = &encryptedMethod;
-        ((encryptFile*)file)->pVfs = vfs;
         
         //Init key
         ((encryptFile*)file)->keySize = 32;
         ((encryptFile*)file)->key = malloc(sizeof(char)*32);
         //Check key bag
-        if (!keybagExist(zName))
+        if (keybagExist(zName) == false) {
+            printf("Generate key bag\n");
             generateKeyBag(zName);
+        }
         copyMasterKey_self(zName, ((encryptFile*)file)->key);
-        
     }
     free(newAddr);
     return resNo;
@@ -140,6 +172,10 @@ int encryptOpen(sqlite3_vfs* vfs, const char *zName, sqlite3_file* file, int fla
 int encryptDelete(sqlite3_vfs* vfs, const char *zName, int syncDir) {
     //Delete file
     int state = underlyingVFS->xDelete(underlyingVFS, zName, syncDir);
+    
+    //If temp file, no delta or map
+    if ( fileIsTemp(zName) ) return state;
+    
     //Delete delta file
     int newAddrLen = strlen(zName)+7;
     char *newAddr = malloc(sizeof(char)*newAddrLen);
@@ -152,10 +188,7 @@ int encryptDelete(sqlite3_vfs* vfs, const char *zName, int syncDir) {
     free(newAddr);
     return state;
 }
-int encryptAccess(sqlite3_vfs* vfs, const char *zName, int flags, int *pResOut) {
-    int state = underlyingVFS->xAccess(underlyingVFS, zName, flags, pResOut);
-    return state;
-}
+int encryptAccess(sqlite3_vfs* vfs, const char *zName, int flags, int *pResOut) { return underlyingVFS->xAccess(underlyingVFS, zName, flags, pResOut); }
 int encryptFullPathname(sqlite3_vfs* vfs, const char *zName, int nOut, char *zOut) { return underlyingVFS->xFullPathname(underlyingVFS, zName, nOut, zOut); }
 void *encryptDlOpen(sqlite3_vfs* vfs, const char *zFilename) { return underlyingVFS->xDlOpen(underlyingVFS, zFilename); }
 void encryptDlError(sqlite3_vfs* vfs, int nByte, char *zErrMsg) { return underlyingVFS->xDlError(underlyingVFS, nByte, zErrMsg); }
@@ -250,6 +283,11 @@ int _origRandomWrite(void *file, const char *buffer, unsigned long long offest, 
 
 //IO Function
 int encryptedClose(sqlite3_file *file) {
+    if ( ((encryptFile*)file)->passThr ) {
+        int res = underlyingFile->pMethods->xClose(underlyingFile);;
+        free(underlyingFile);
+        return res;
+    }
     int state = underlyingFile->pMethods->xClose(underlyingFile);
     state |= modifingFile->pMethods->xClose(modifingFile);
     fclose(((encryptFile*)file)->bitMapFile);
@@ -260,10 +298,14 @@ int encryptedClose(sqlite3_file *file) {
     free(((encryptFile*)file)->modifiedBit);
     free(((encryptFile*)file)->key);
     
+    //Merging
+    encryptSqlite3_Merger(((encryptFile*) file)->addr);
+    
     assert(state == 0);
     return state;
 }
 int encryptedRead(sqlite3_file *file, void* content, int iAmt, sqlite3_int64 iOfst) {
+    if ( ((encryptFile*)file)->passThr ) return underlyingFile->pMethods->xRead(underlyingFile, content, iAmt, iOfst);
     sqlite3_int64 size;
     file->pMethods->xFileSize(file, &size);
     int state = deltaDecrypt(file, ((encryptFile*)file)->key, ((encryptFile*)file)->keySize, (void*)content, iOfst, iAmt, _origRandomRead, _randomRead);
@@ -292,6 +334,10 @@ int growDatabase(encryptFile *file, sqlite_int64 lastOffset, int lastLen) {
     return state;
 }
 int encryptedWrite(sqlite3_file *file, const void*content, int iAmt, sqlite3_int64 iOfst) {
+    if ( ((encryptFile*)file)->passThr ) {
+        int d = underlyingFile->pMethods->xWrite(underlyingFile, content, iAmt, iOfst);
+        return d;
+    }
     sqlite3_int64 size;
     file->pMethods->xFileSize(file, &size);
     sqlite_int64 ivEnd = iOfst+iAmt;
@@ -302,11 +348,10 @@ int encryptedWrite(sqlite3_file *file, const void*content, int iAmt, sqlite3_int
     return deltaEncrypt(file, ((encryptFile*)file)->key, ((encryptFile*)file)->keySize, (void*)content, iOfst, iAmt, size <= iAmt+iOfst, _origRandomRead, _randomRead, _randomWrite);
 }
 int encryptedTruncate(sqlite3_file *file, sqlite3_int64 size) {
-    int state = underlyingFile->pMethods->xTruncate(underlyingFile, size);
-    assert(state == 0);
-    return state;
+    return underlyingFile->pMethods->xTruncate(underlyingFile, size);
 }
 int encryptedSync(sqlite3_file *file, int flags) {
+    if ( ((encryptFile*)file)->passThr ) return underlyingFile->pMethods->xSync(underlyingFile, flags);
     //Before the sync, flush the bitmap first
     saveBitmap(file);
     int state = underlyingFile->pMethods->xSync(underlyingFile, flags);
@@ -314,44 +359,29 @@ int encryptedSync(sqlite3_file *file, int flags) {
     return state;
 }
 int encryptedFileSize(sqlite3_file *file, sqlite3_int64 *pSize) {
-    int state = underlyingFile->pMethods->xFileSize(underlyingFile, pSize);
-    assert(state == 0);
-    return state;
+    return underlyingFile->pMethods->xFileSize(underlyingFile, pSize);
 }
 int encryptedLock(sqlite3_file *file, int flag) {
-    int state = underlyingFile->pMethods->xLock(underlyingFile, flag);
-    assert(state == 0);
-    return state;
+    return underlyingFile->pMethods->xLock(underlyingFile, flag);
 }
 int encryptedUnlock(sqlite3_file *file, int flag) {
-    int state = underlyingFile->pMethods->xUnlock(underlyingFile, flag);
-    assert(state == 0);
-    return state;
+    return underlyingFile->pMethods->xUnlock(underlyingFile, flag);
 }
 int encryptedCheckReservedLock(sqlite3_file *file, int *pResOut) {
-    int state = underlyingFile->pMethods->xCheckReservedLock(underlyingFile, pResOut);
-    assert(state == 0);
-    return state;
+    return underlyingFile->pMethods->xCheckReservedLock(underlyingFile, pResOut);
 }
 int encryptedFileControl(sqlite3_file *file, int op, void *pArg) {
-    int state = underlyingFile->pMethods->xFileControl(underlyingFile, op, pArg);
-    
-    return state;
+    return underlyingFile->pMethods->xFileControl(underlyingFile, op, pArg);
 }
 int encryptedSectorSize(sqlite3_file *file) {
-    int state = underlyingFile->pMethods->xSectorSize(underlyingFile);
-    assert(state == 0);
-    return state;
+    return underlyingFile->pMethods->xSectorSize(underlyingFile);
 }
 int encryptedDeviceCharacteristics(sqlite3_file *file) {
-    int state = underlyingFile->pMethods->xDeviceCharacteristics(underlyingFile);
-    return state;
+    return underlyingFile->pMethods->xDeviceCharacteristics(underlyingFile);
 }
 /* Methods above are valid for version 1 */
 int encryptedShmMap(sqlite3_file *file, int iPg, int pgsz, int flag, void volatile** ctn) {
-    int state = underlyingFile->pMethods->xShmMap(underlyingFile, iPg, pgsz, flag, ctn);
-    assert(state == 0);
-    return state;
+    return underlyingFile->pMethods->xShmMap(underlyingFile, iPg, pgsz, flag, ctn);
 }
 int encryptedShmLock(sqlite3_file *file, int offset, int n, int flags) {
     int state = underlyingFile->pMethods->xShmLock(underlyingFile, offset, n, flags);
@@ -459,12 +489,78 @@ int encryptSqlite3_open(const char *filename, sqlite3 **ppDb) {
 }
 
 int encryptSqlite3_open_v2(const char *filename, sqlite3 **ppDb, int flags, const char *zVfs) {
-    char sql[] = "PRAGMA page_size = 4096;";
     sqlite3_vfs *vfs = fetchVFS(zVfs);
     if (vfs) {
         int state = sqlite3_open_v2(filename, ppDb, flags, vfs->zName);
         char *err;
+        char *sql = "PRAGMA page_size = 4096;";
+        state |= sqlite3_exec(*ppDb, sql, NULL, 0, &err);
+        sql = "PRAGMA journal_mode=WAL;";
         state |= sqlite3_exec(*ppDb, sql, NULL, 0, &err);
         return state;
     } else return SQLITE_FAIL;
+}
+
+
+void encryptSqlite3_Merger(const char *addr) {
+    //Get file size
+    struct stat st;
+    stat(addr, &st);
+    unsigned long long size = st.st_size;
+    
+    //Open original file
+    size_t addrLen = strlen(addr);
+    int dbFile = open(addr, O_RDONLY);
+    char *oldBuf = (char*)mmap(NULL, size, PROT_READ, MAP_PRIVATE, dbFile, 0);
+    
+    //Open modified file
+    char *resultAddr = malloc(sizeof(char)*(addrLen+7));
+    bcopy(addr, resultAddr, addrLen);
+    bcopy(".delta", &(resultAddr[addrLen]), 7);
+    int deltaFile = open(resultAddr, O_RDONLY);
+    char *deltaBuf = (char*)mmap(NULL, size, PROT_READ, MAP_PRIVATE, deltaFile, 0);
+    
+    bcopy(".map", &(resultAddr[addrLen]), 5);
+    int mapFile = open(resultAddr, O_RDONLY);
+    bool *mapBuf = (bool*)mmap(NULL, size/4, PROT_READ, MAP_PRIVATE, mapFile, 0);
+    
+    //Open output
+    bcopy(".store", &(resultAddr[addrLen]), 7);
+    int storeFile = open(resultAddr, O_RDWR | O_CREAT | O_NONBLOCK | O_TRUNC, 420);
+    ftruncate(storeFile, size);
+    char *storeBuf = (char*)mmap(NULL, size, PROT_READ|PROT_WRITE, MAP_SHARED, storeFile, 0);
+    
+    //Key
+    char key[32];
+    copyMasterKey_self(addr, key);
+    
+    char allZero[16];
+    bzero(allZero, 16);
+    
+    for (unsigned long long i = 0; i < size; i+=16) {
+        unsigned long long iDiv16 = i >> 4;
+        //For every block
+        //Read iv
+        char *decryIV = i == 0? allZero: &oldBuf[i-16];
+        char *encryIV = i == 0? allZero: &storeBuf[i-16];
+        //Read content
+        char *inputPtr = mapBuf[iDiv16]? &(deltaBuf[i]): &(oldBuf[i]);
+        char plaintext[16];
+        lowLevelMaskingDecrypt(key, 32, decryIV, inputPtr, 16, plaintext);
+        lowLevelEncrypt(key, 32, encryIV, 16, plaintext, 16, &(storeBuf[i]));
+    }
+    
+    munmap(storeBuf, size);
+    
+    close(storeFile);
+    
+    //Finish merging
+    unlink(addr);
+    bcopy(".delta", &(resultAddr[addrLen]), 7);
+    unlink(resultAddr);
+    bcopy(".map", &(resultAddr[addrLen]), 5);
+    unlink(resultAddr);
+    
+    bcopy(".store", &(resultAddr[addrLen]), 7);
+    rename(resultAddr, addr);
 }

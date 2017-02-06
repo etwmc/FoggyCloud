@@ -24,6 +24,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>SampleFisherLinearClassifier.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
 		<key>databaseMerger.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -32,6 +37,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>3300933C1E24A32E00878AA4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>335ACB901E15CB5B00E5136B</key>
 		<dict>
 			<key>primary</key>
