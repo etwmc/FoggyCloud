@@ -77,20 +77,19 @@ function pushMessage(userID: string, messageID: string, senderID: string, callba
 //0-31: binary AES-256 key first wrap with sender public key, then wrap with receiver public key
 //32-...: AES-256 with padding, then HMAC-SHA1 (SHA256 later)
 //Handle: directly write to a random file
-//Signature: SHA256 for the message packet in base64
+//Signature: SHA512 for the message packet in base64
 //After checking signature, it will write async with a UUID name, and an async write the UUID in push
 
 //The data would be encrypted using the receiver public key in RSA on the user end, then sign by the sender's private key
 //At the user side, it will be opague to the server, only can be decrypt using receiver's private key, which is PRIVATE to the device end. So it ensure end to end encrpytion between the sender and receiver
 //Callback prototype: function(errorSource, error)
 //Callback will be fired at least once, regardless if it sucess
-export function messasgeInsertion(targetUserID: string, senderIdentityID: string, message: NodeBuffer, signature: string, callback: msgOpErrorHandler) {
+export function messasgeInsertion(targetUserID: string, senderIdentityID: string, msgID: string, message: NodeBuffer, signature: string, callback: msgOpErrorHandler) {
     //Data needed for receiver to verify and decrypt the message on the device from the server:
     //sender's public key, which can be retrieved by sender identity ID
     //the packet itself
-    const uid = uuidV1();
 
-    dataIO.uniqueCreateAndLock(targetUserID, "msg/"+uid, (err)=>{
+    dataIO.uniqueCreateAndLock(targetUserID, "msg/"+msgID, (err)=>{
         if (err) {
             //Retry
             err.appendCause("msgQueue");
@@ -106,8 +105,8 @@ export function messasgeInsertion(targetUserID: string, senderIdentityID: string
                     callback(null);
                 }
             }
-            dataIO.appendData(targetUserID, "msg/"+uid, message, (err)=>{
-                dataIO.unlockFile(targetUserID, "msg/"+uid, (err)=>{});
+            dataIO.appendData(targetUserID, "msg/"+msgID, message, (err)=>{
+                dataIO.unlockFile(targetUserID, "msg/"+msgID, (err)=>{});
                 if (err) {
                     err.appendCause("msgQueue");
                     callback(err);
@@ -116,7 +115,7 @@ export function messasgeInsertion(targetUserID: string, senderIdentityID: string
                     merge();
                 }
             })
-            pushMessage(targetUserID, uid, senderIdentityID, (err)=>{
+            pushMessage(targetUserID, msgID, senderIdentityID, (err)=>{
                 if (err) {
                     err.appendCause("msgQueue");
                     callback(err);

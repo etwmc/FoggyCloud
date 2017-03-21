@@ -97,7 +97,7 @@ int main(int argc, const char * argv[]) {
     _distribution = std::normal_distribution<double>(0, 0.1);
     char *insertSQLFormat = "INSERT INTO image_3x3 "  \
     "VALUES ( NULL, %f, %f, %f, %f, %f, %f, %f, %f, %f, %d ); ";
-    for (int i = 0; i < 100000; i++) {
+    for (int i = 0; i < 1000000; i++) {
         double vector[9];
         bool useVersionA = ((double)rand())/RAND_MAX > 0.5;
         double *chosenVector = useVersionA? VectorA: VectorB;

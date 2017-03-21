@@ -61,7 +61,8 @@ function handleRequest(request: http.IncomingMessage, response: http.ServerRespo
                         const buffer = Buffer.concat(buffers, length);
                         const target: string = requestURL.query['tuid'];
                         const signature: string = request.headers["body-signature"];
-                        msgQueue.messasgeInsertion(target, userID, buffer, signature, (err)=>{
+                        const msgID: string = request.headers["msgID"];
+                        msgQueue.messasgeInsertion(target, userID, msgID, buffer, signature, (err)=>{
                             if (err) {
                                 //There is an error in push
                                 response.statusCode = 500;

@@ -67,6 +67,8 @@ void generateKeyBag(const char* addr) {
     char*keybag = (char*)malloc(sizeof(char)*4096);
     snprintf(keybag, 4096, "%s.keybag", addr);
     FILE *f = fopen(keybag, "w");
+    snprintf(keybag, 4096, "%s.keybag.pub", addr);
+    FILE *pubF = fopen(keybag, "w");
     free(keybag);
     
     char *master = malloc(sizeof(char)*symmetryKeySize);
@@ -78,9 +80,11 @@ void generateKeyBag(const char* addr) {
     char *priv = malloc(sizeof(char)*4096);
     char *pub = malloc(sizeof(char)*4096);
     generateRSAKey(priv, pub, asymmetryKeySize, &privateKeySize, &publicKeySize);
+    fwrite(pub, sizeof(char), publicKeySize, pubF);
     fwrite(priv, sizeof(char), privateKeySize, f);
     free(priv);
     free(pub);
     
+    fclose(pubF);
     fclose(f);
 }

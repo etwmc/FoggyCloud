@@ -31,13 +31,58 @@
 		335FC7C61E242D6E0064A60A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3354287E1E149AA900A78F03 /* Security.framework */; };
 		335FC7C71E242D7B0064A60A /* libSystem.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E8866D1DF038BC00C2833D /* libSystem.tbd */; };
 		335FC7C81E242D800064A60A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335428801E149AB000A78F03 /* CoreFoundation.framework */; };
-		335FC7CD1E244F7A0064A60A /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 335FC7CB1E244EEA0064A60A /* sqlite3.c */; };
+		3363C5F21E6BD04F00BF84AD /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 3363C5F11E6BD04F00BF84AD /* base64.c */; };
+		3363C5F41E6BD06600BF84AD /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 3363C5F31E6BD06600BF84AD /* base64.h */; };
+		3363C5F71E6BEEB600BF84AD /* CVtKeychain.c in Sources */ = {isa = PBXBuildFile; fileRef = 3363C5F51E6BEEB600BF84AD /* CVtKeychain.c */; };
+		3363C5F81E6BEEB600BF84AD /* CVtKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = 3363C5F61E6BEEB600BF84AD /* CVtKeychain.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33683E281E6E8D0C00FF763F /* CVtPlatformCode_PushNotification.c in Sources */ = {isa = PBXBuildFile; fileRef = 33683E261E6E8D0C00FF763F /* CVtPlatformCode_PushNotification.c */; };
+		33683E291E6E8D0C00FF763F /* CVtPlatformCode_PushNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 33683E271E6E8D0C00FF763F /* CVtPlatformCode_PushNotification.h */; };
+		33683E2C1E6E917900FF763F /* CVtEventualMerger.c in Sources */ = {isa = PBXBuildFile; fileRef = 33683E2A1E6E917900FF763F /* CVtEventualMerger.c */; };
+		33683E2D1E6E917900FF763F /* CVtEventualMerger.h in Headers */ = {isa = PBXBuildFile; fileRef = 33683E2B1E6E917900FF763F /* CVtEventualMerger.h */; };
+		3369ED3D1E49409D00C5D179 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 335428821E149FA200A78F03 /* libsqlite3.0.tbd */; };
+		3369ED3E1E4940C100C5D179 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 335428821E149FA200A78F03 /* libsqlite3.0.tbd */; };
+		3369ED411E49732B00C5D179 /* CVtCloudTranscation.c in Sources */ = {isa = PBXBuildFile; fileRef = 3369ED3F1E49732B00C5D179 /* CVtCloudTranscation.c */; };
+		3369ED421E49732B00C5D179 /* CVtCloudTranscation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3369ED401E49732B00C5D179 /* CVtCloudTranscation.h */; };
+		3369ED451E49AF1E00C5D179 /* CVtPlatformCode_Network.c in Sources */ = {isa = PBXBuildFile; fileRef = 3369ED431E49AF1E00C5D179 /* CVtPlatformCode_Network.c */; };
+		3369ED461E49AF1E00C5D179 /* CVtPlatformCode_Network.h in Headers */ = {isa = PBXBuildFile; fileRef = 3369ED441E49AF1E00C5D179 /* CVtPlatformCode_Network.h */; };
+		3369ED4A1E49C5B000C5D179 /* CVtNetworkStack.c in Sources */ = {isa = PBXBuildFile; fileRef = 3369ED481E49C5B000C5D179 /* CVtNetworkStack.c */; };
+		3369ED4B1E49C5B000C5D179 /* CVtNetworkStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 3369ED491E49C5B000C5D179 /* CVtNetworkStack.h */; };
+		337432A81E669A96003B09D6 /* CVtPlatformCode_NetworkDarwinHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 337432A61E669A96003B09D6 /* CVtPlatformCode_NetworkDarwinHelper.h */; };
+		337432A91E669A96003B09D6 /* CVtPlatformCode_NetworkDarwinHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 337432A71E669A96003B09D6 /* CVtPlatformCode_NetworkDarwinHelper.m */; };
+		337999011E5D063C004A125C /* CVtPlatformCode_Encryption.c in Sources */ = {isa = PBXBuildFile; fileRef = 337998FF1E5D063C004A125C /* CVtPlatformCode_Encryption.c */; };
+		337999021E5D063C004A125C /* CVtPlatformCode_Encryption.h in Headers */ = {isa = PBXBuildFile; fileRef = 337999001E5D063C004A125C /* CVtPlatformCode_Encryption.h */; };
+		33AAB1221E7DE9C5004DCFFF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AAB1211E7DE9C5004DCFFF /* AppDelegate.m */; };
+		33AAB1251E7DE9C5004DCFFF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AAB1241E7DE9C5004DCFFF /* main.m */; };
+		33AAB1281E7DE9C5004DCFFF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AAB1271E7DE9C5004DCFFF /* ViewController.m */; };
+		33AAB12A1E7DE9C5004DCFFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33AAB1291E7DE9C5004DCFFF /* Assets.xcassets */; };
+		33AAB12D1E7DE9C5004DCFFF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33AAB12B1E7DE9C5004DCFFF /* Main.storyboard */; };
+		33AAB13C1E7DEF36004DCFFF /* CVtUserManagment.c in Sources */ = {isa = PBXBuildFile; fileRef = 33AAB13A1E7DEF36004DCFFF /* CVtUserManagment.c */; };
+		33AAB13D1E7DEF36004DCFFF /* CVtUserManagment.h in Headers */ = {isa = PBXBuildFile; fileRef = 33AAB13B1E7DEF36004DCFFF /* CVtUserManagment.h */; };
+		33ABA0111E54097300D812B5 /* CVt_LocalJournal.c in Sources */ = {isa = PBXBuildFile; fileRef = 33ABA00F1E54097300D812B5 /* CVt_LocalJournal.c */; };
+		33ABA0121E54097300D812B5 /* CVt_LocalJournal.h in Headers */ = {isa = PBXBuildFile; fileRef = 33ABA0101E54097300D812B5 /* CVt_LocalJournal.h */; };
+		33ABA0151E5415AD00D812B5 /* CVt_FileManagement.c in Sources */ = {isa = PBXBuildFile; fileRef = 33ABA0131E5415AD00D812B5 /* CVt_FileManagement.c */; };
+		33ABA0161E5415AD00D812B5 /* CVt_FileManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = 33ABA0141E5415AD00D812B5 /* CVt_FileManagement.h */; };
+		33ABA0191E54310900D812B5 /* CVtPlatformCode_Threading.c in Sources */ = {isa = PBXBuildFile; fileRef = 33ABA0171E54310900D812B5 /* CVtPlatformCode_Threading.c */; };
+		33ABA01A1E54310900D812B5 /* CVtPlatformCode_Threading.h in Headers */ = {isa = PBXBuildFile; fileRef = 33ABA0181E54310900D812B5 /* CVtPlatformCode_Threading.h */; };
 		33C40FDD1E24DE590055BD6C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C40FDC1E24DE590055BD6C /* Accelerate.framework */; };
 		33E886661DF0389F00C2833D /* EncryptionBlocker.c in Sources */ = {isa = PBXBuildFile; fileRef = 33E8865B1DF037F600C2833D /* EncryptionBlocker.c */; };
 		33E886681DF0389F00C2833D /* DeltaPager.c in Sources */ = {isa = PBXBuildFile; fileRef = 33E886591DF037D400C2833D /* DeltaPager.c */; };
 		33E8866A1DF038A900C2833D /* DeltaPager.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E8865A1DF037D400C2833D /* DeltaPager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33E8866B1DF038AE00C2833D /* EncryptionBlocker.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E8865C1DF037F600C2833D /* EncryptionBlocker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33E8866E1DF038BC00C2833D /* libSystem.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E8866D1DF038BC00C2833D /* libSystem.tbd */; };
+		33EE76D31E6FD22E0040DB8F /* json.c in Sources */ = {isa = PBXBuildFile; fileRef = 33EE76C21E6FD20E0040DB8F /* json.c */; };
+		33EE76D41E6FD22E0040DB8F /* mjson.c in Sources */ = {isa = PBXBuildFile; fileRef = 33EE76C61E6FD20E0040DB8F /* mjson.c */; };
+		33EE76D51E6FD2360040DB8F /* mjson.h in Headers */ = {isa = PBXBuildFile; fileRef = 33EE76C71E6FD20E0040DB8F /* mjson.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33EE76D71E6FD2A70040DB8F /* gpsd_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 33EE76D61E6FD2A70040DB8F /* gpsd_config.h */; };
+		33EE76D81E6FD3130040DB8F /* libmicrojson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33EE76CF1E6FD2230040DB8F /* libmicrojson.a */; };
+		33EE76DC1E7237D00040DB8F /* CVtPlatformCode_NearbySync.c in Sources */ = {isa = PBXBuildFile; fileRef = 33EE76DA1E7237D00040DB8F /* CVtPlatformCode_NearbySync.c */; };
+		33EE76DD1E7237D00040DB8F /* CVtPlatformCode_NearbySync.c in Sources */ = {isa = PBXBuildFile; fileRef = 33EE76DA1E7237D00040DB8F /* CVtPlatformCode_NearbySync.c */; };
+		33EE76DE1E7237D00040DB8F /* CVtPlatformCode_NearbySync.h in Headers */ = {isa = PBXBuildFile; fileRef = 33EE76DB1E7237D00040DB8F /* CVtPlatformCode_NearbySync.h */; };
+		33EE76DF1E7237D00040DB8F /* CVtPlatformCode_NearbySync.h in Headers */ = {isa = PBXBuildFile; fileRef = 33EE76DB1E7237D00040DB8F /* CVtPlatformCode_NearbySync.h */; };
+		33EE76E21E7251D20040DB8F /* CVt_ResourceManagment.c in Sources */ = {isa = PBXBuildFile; fileRef = 33EE76E01E7251D20040DB8F /* CVt_ResourceManagment.c */; };
+		33EE76E31E7251D20040DB8F /* CVt_ResourceManagment.c in Sources */ = {isa = PBXBuildFile; fileRef = 33EE76E01E7251D20040DB8F /* CVt_ResourceManagment.c */; };
+		33EE76E41E7251D20040DB8F /* CVt_ResourceManagment.h in Headers */ = {isa = PBXBuildFile; fileRef = 33EE76E11E7251D20040DB8F /* CVt_ResourceManagment.h */; };
+		33EE76E51E7251D20040DB8F /* CVt_ResourceManagment.h in Headers */ = {isa = PBXBuildFile; fileRef = 33EE76E11E7251D20040DB8F /* CVt_ResourceManagment.h */; };
 		33FECD7D1E1863DA009D5959 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FECD7C1E1863DA009D5959 /* main.m */; };
 		33FECD831E19C99E009D5959 /* libCloudValue_Sqlite.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E886611DF0389600C2833D /* libCloudValue_Sqlite.dylib */; };
 /* End PBXBuildFile section */
@@ -122,6 +167,43 @@
 		335FC7BE1E23752F0064A60A /* DeltaPager_Priv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeltaPager_Priv.h; sourceTree = "<group>"; };
 		335FC7C91E244ED70064A60A /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
 		335FC7CB1E244EEA0064A60A /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
+		3363C5F11E6BD04F00BF84AD /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = base64.c; path = ExternalSource/base64.c; sourceTree = "<group>"; };
+		3363C5F31E6BD06600BF84AD /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = base64.h; path = ExternalSource/base64.h; sourceTree = "<group>"; };
+		3363C5F51E6BEEB600BF84AD /* CVtKeychain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVtKeychain.c; sourceTree = "<group>"; };
+		3363C5F61E6BEEB600BF84AD /* CVtKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVtKeychain.h; sourceTree = "<group>"; };
+		33683E261E6E8D0C00FF763F /* CVtPlatformCode_PushNotification.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVtPlatformCode_PushNotification.c; sourceTree = "<group>"; };
+		33683E271E6E8D0C00FF763F /* CVtPlatformCode_PushNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVtPlatformCode_PushNotification.h; sourceTree = "<group>"; };
+		33683E2A1E6E917900FF763F /* CVtEventualMerger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVtEventualMerger.c; sourceTree = "<group>"; };
+		33683E2B1E6E917900FF763F /* CVtEventualMerger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVtEventualMerger.h; sourceTree = "<group>"; };
+		3369ED3F1E49732B00C5D179 /* CVtCloudTranscation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVtCloudTranscation.c; sourceTree = "<group>"; };
+		3369ED401E49732B00C5D179 /* CVtCloudTranscation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVtCloudTranscation.h; sourceTree = "<group>"; };
+		3369ED431E49AF1E00C5D179 /* CVtPlatformCode_Network.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVtPlatformCode_Network.c; sourceTree = "<group>"; };
+		3369ED441E49AF1E00C5D179 /* CVtPlatformCode_Network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVtPlatformCode_Network.h; sourceTree = "<group>"; };
+		3369ED471E49B7C100C5D179 /* CVtProjectConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVtProjectConstant.h; sourceTree = "<group>"; };
+		3369ED481E49C5B000C5D179 /* CVtNetworkStack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVtNetworkStack.c; sourceTree = "<group>"; };
+		3369ED491E49C5B000C5D179 /* CVtNetworkStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVtNetworkStack.h; sourceTree = "<group>"; };
+		337432A61E669A96003B09D6 /* CVtPlatformCode_NetworkDarwinHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVtPlatformCode_NetworkDarwinHelper.h; sourceTree = "<group>"; };
+		337432A71E669A96003B09D6 /* CVtPlatformCode_NetworkDarwinHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVtPlatformCode_NetworkDarwinHelper.m; sourceTree = "<group>"; };
+		337998FF1E5D063C004A125C /* CVtPlatformCode_Encryption.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVtPlatformCode_Encryption.c; sourceTree = "<group>"; };
+		337999001E5D063C004A125C /* CVtPlatformCode_Encryption.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVtPlatformCode_Encryption.h; sourceTree = "<group>"; };
+		33A3BB8F1E7A52340097DF70 /* CVtPlatformCode_CommunicationDataStructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVtPlatformCode_CommunicationDataStructure.h; sourceTree = "<group>"; };
+		33AAB11E1E7DE9C4004DCFFF /* VaultTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VaultTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		33AAB1201E7DE9C5004DCFFF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		33AAB1211E7DE9C5004DCFFF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		33AAB1241E7DE9C5004DCFFF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		33AAB1261E7DE9C5004DCFFF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		33AAB1271E7DE9C5004DCFFF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		33AAB1291E7DE9C5004DCFFF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		33AAB12C1E7DE9C5004DCFFF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		33AAB12E1E7DE9C5004DCFFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33AAB13A1E7DEF36004DCFFF /* CVtUserManagment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVtUserManagment.c; sourceTree = "<group>"; };
+		33AAB13B1E7DEF36004DCFFF /* CVtUserManagment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVtUserManagment.h; sourceTree = "<group>"; };
+		33ABA00F1E54097300D812B5 /* CVt_LocalJournal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVt_LocalJournal.c; sourceTree = "<group>"; };
+		33ABA0101E54097300D812B5 /* CVt_LocalJournal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVt_LocalJournal.h; sourceTree = "<group>"; };
+		33ABA0131E5415AD00D812B5 /* CVt_FileManagement.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVt_FileManagement.c; sourceTree = "<group>"; };
+		33ABA0141E5415AD00D812B5 /* CVt_FileManagement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVt_FileManagement.h; sourceTree = "<group>"; };
+		33ABA0171E54310900D812B5 /* CVtPlatformCode_Threading.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVtPlatformCode_Threading.c; sourceTree = "<group>"; };
+		33ABA0181E54310900D812B5 /* CVtPlatformCode_Threading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVtPlatformCode_Threading.h; sourceTree = "<group>"; };
 		33C40FDC1E24DE590055BD6C /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		33E886591DF037D400C2833D /* DeltaPager.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = DeltaPager.c; sourceTree = "<group>"; };
 		33E8865A1DF037D400C2833D /* DeltaPager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeltaPager.h; sourceTree = "<group>"; };
@@ -129,6 +211,28 @@
 		33E8865C1DF037F600C2833D /* EncryptionBlocker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EncryptionBlocker.h; sourceTree = "<group>"; };
 		33E886611DF0389600C2833D /* libCloudValue_Sqlite.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCloudValue_Sqlite.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		33E8866D1DF038BC00C2833D /* libSystem.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libSystem.tbd; path = usr/lib/libSystem.tbd; sourceTree = SDKROOT; };
+		33EE76BD1E6FD20E0040DB8F /* control */ = {isa = PBXFileReference; lastKnownFileType = text; path = control; sourceTree = "<group>"; };
+		33EE76BE1E6FD20E0040DB8F /* COPYING */ = {isa = PBXFileReference; lastKnownFileType = text; path = COPYING; sourceTree = "<group>"; };
+		33EE76BF1E6FD20E0040DB8F /* example1.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = example1.c; sourceTree = "<group>"; };
+		33EE76C01E6FD20E0040DB8F /* example2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = example2.c; sourceTree = "<group>"; };
+		33EE76C11E6FD20E0040DB8F /* example3.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = example3.c; sourceTree = "<group>"; };
+		33EE76C21E6FD20E0040DB8F /* json.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = json.c; sourceTree = "<group>"; };
+		33EE76C31E6FD20E0040DB8F /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		33EE76C41E6FD20E0040DB8F /* microjson.asc */ = {isa = PBXFileReference; lastKnownFileType = text; path = microjson.asc; sourceTree = "<group>"; };
+		33EE76C51E6FD20E0040DB8F /* mjson.asc */ = {isa = PBXFileReference; lastKnownFileType = text; path = mjson.asc; sourceTree = "<group>"; };
+		33EE76C61E6FD20E0040DB8F /* mjson.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = mjson.c; sourceTree = "<group>"; };
+		33EE76C71E6FD20E0040DB8F /* mjson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = mjson.h; sourceTree = "<group>"; };
+		33EE76C81E6FD20E0040DB8F /* NEWS */ = {isa = PBXFileReference; lastKnownFileType = text; path = NEWS; sourceTree = "<group>"; };
+		33EE76C91E6FD20E0040DB8F /* README */ = {isa = PBXFileReference; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		33EE76CA1E6FD20E0040DB8F /* test_microjson.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_microjson.c; sourceTree = "<group>"; };
+		33EE76CF1E6FD2230040DB8F /* libmicrojson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmicrojson.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		33EE76D61E6FD2A70040DB8F /* gpsd_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpsd_config.h; sourceTree = "<group>"; };
+		33EE76D91E7235F20040DB8F /* CVtCloudTranscation_Priv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVtCloudTranscation_Priv.h; sourceTree = "<group>"; };
+		33EE76DA1E7237D00040DB8F /* CVtPlatformCode_NearbySync.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVtPlatformCode_NearbySync.c; sourceTree = "<group>"; };
+		33EE76DB1E7237D00040DB8F /* CVtPlatformCode_NearbySync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVtPlatformCode_NearbySync.h; sourceTree = "<group>"; };
+		33EE76E01E7251D20040DB8F /* CVt_ResourceManagment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CVt_ResourceManagment.c; sourceTree = "<group>"; };
+		33EE76E11E7251D20040DB8F /* CVt_ResourceManagment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVt_ResourceManagment.h; sourceTree = "<group>"; };
+		33EE76E61E726FAE0040DB8F /* CVt_ResourceManagment_Priv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVt_ResourceManagment_Priv.h; sourceTree = "<group>"; };
 		33FECD7A1E1863DA009D5959 /* Decryptor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Decryptor; sourceTree = BUILT_PRODUCTS_DIR; };
 		33FECD7C1E1863DA009D5959 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +242,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3369ED3E1E4940C100C5D179 /* libsqlite3.0.tbd in Frameworks */,
 				330093441E24A33500878AA4 /* libCloudValue_Sqlite.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,14 +276,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		33AAB11B1E7DE9C4004DCFFF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		33E8865E1DF0389600C2833D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33EE76D81E6FD3130040DB8F /* libmicrojson.a in Frameworks */,
+				3369ED3D1E49409D00C5D179 /* libsqlite3.0.tbd in Frameworks */,
 				33C40FDD1E24DE590055BD6C /* Accelerate.framework in Frameworks */,
 				335428811E149AB000A78F03 /* CoreFoundation.framework in Frameworks */,
 				3354287F1E149AA900A78F03 /* Security.framework in Frameworks */,
 				33E8866E1DF038BC00C2833D /* libSystem.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		33EE76CC1E6FD2230040DB8F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,16 +325,16 @@
 		330093451E24B7C500878AA4 /* CloudVault Lib */ = {
 			isa = PBXGroup;
 			children = (
+				3363C5F01E6BD03C00BF84AD /* External */,
+				337998FE1E5D060A004A125C /* Platform Code */,
 				330093461E24B7D000878AA4 /* Machine Learning */,
-				335FC7CB1E244EEA0064A60A /* sqlite3.c */,
-				335ACB8C1E14F45B00E5136B /* CloudVault.h */,
+				33AAB1331E7DEE56004DCFFF /* Encrypted Database */,
 				335ACB871E14F07E00E5136B /* Key Management */,
-				335428791E148B8D00A78F03 /* Random Cipher */,
-				33E8865B1DF037F600C2833D /* EncryptionBlocker.c */,
-				33E8865C1DF037F600C2833D /* EncryptionBlocker.h */,
-				33E886591DF037D400C2833D /* DeltaPager.c */,
-				33E8865A1DF037D400C2833D /* DeltaPager.h */,
-				335FC7BE1E23752F0064A60A /* DeltaPager_Priv.h */,
+				33AAB1391E7DEEF2004DCFFF /* User Login */,
+				33AAB1321E7DEE42004DCFFF /* Transcational Management */,
+				335ACB8C1E14F45B00E5136B /* CloudVault.h */,
+				33AAB1381E7DEECD004DCFFF /* Backbone */,
+				3369ED471E49B7C100C5D179 /* CVtProjectConstant.h */,
 			);
 			name = "CloudVault Lib";
 			sourceTree = "<group>";
@@ -239,6 +360,8 @@
 		335ACB871E14F07E00E5136B /* Key Management */ = {
 			isa = PBXGroup;
 			children = (
+				3363C5F51E6BEEB600BF84AD /* CVtKeychain.c */,
+				3363C5F61E6BEEB600BF84AD /* CVtKeychain.h */,
 				335ACB881E14F0AD00E5136B /* CVtKeyManagment.c */,
 				335ACB891E14F0AD00E5136B /* CVtKeyManagment.h */,
 			);
@@ -269,6 +392,158 @@
 			path = databaseMerger;
 			sourceTree = "<group>";
 		};
+		3363C5F01E6BD03C00BF84AD /* External */ = {
+			isa = PBXGroup;
+			children = (
+				335FC7CB1E244EEA0064A60A /* sqlite3.c */,
+				3363C5F11E6BD04F00BF84AD /* base64.c */,
+				3363C5F31E6BD06600BF84AD /* base64.h */,
+				33EE76BC1E6FD20E0040DB8F /* microjson-1.3 */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
+		3363C5F91E6C9C7E00BF84AD /* Darwin */ = {
+			isa = PBXGroup;
+			children = (
+				337432A61E669A96003B09D6 /* CVtPlatformCode_NetworkDarwinHelper.h */,
+				337432A71E669A96003B09D6 /* CVtPlatformCode_NetworkDarwinHelper.m */,
+			);
+			name = Darwin;
+			sourceTree = "<group>";
+		};
+		337998FE1E5D060A004A125C /* Platform Code */ = {
+			isa = PBXGroup;
+			children = (
+				3363C5F91E6C9C7E00BF84AD /* Darwin */,
+				33A3BB8C1E7A511F0097DF70 /* Data Fetching */,
+				33A3BB8D1E7A512B0097DF70 /* CPU */,
+				33A3BB8E1E7A51330097DF70 /* Push */,
+			);
+			name = "Platform Code";
+			sourceTree = "<group>";
+		};
+		33A3BB8C1E7A511F0097DF70 /* Data Fetching */ = {
+			isa = PBXGroup;
+			children = (
+				33A3BB8F1E7A52340097DF70 /* CVtPlatformCode_CommunicationDataStructure.h */,
+				3369ED431E49AF1E00C5D179 /* CVtPlatformCode_Network.c */,
+				3369ED441E49AF1E00C5D179 /* CVtPlatformCode_Network.h */,
+				33EE76DA1E7237D00040DB8F /* CVtPlatformCode_NearbySync.c */,
+				33EE76DB1E7237D00040DB8F /* CVtPlatformCode_NearbySync.h */,
+			);
+			name = "Data Fetching";
+			sourceTree = "<group>";
+		};
+		33A3BB8D1E7A512B0097DF70 /* CPU */ = {
+			isa = PBXGroup;
+			children = (
+				33ABA0171E54310900D812B5 /* CVtPlatformCode_Threading.c */,
+				33ABA0181E54310900D812B5 /* CVtPlatformCode_Threading.h */,
+				337998FF1E5D063C004A125C /* CVtPlatformCode_Encryption.c */,
+				337999001E5D063C004A125C /* CVtPlatformCode_Encryption.h */,
+			);
+			name = CPU;
+			sourceTree = "<group>";
+		};
+		33A3BB8E1E7A51330097DF70 /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				33683E261E6E8D0C00FF763F /* CVtPlatformCode_PushNotification.c */,
+				33683E271E6E8D0C00FF763F /* CVtPlatformCode_PushNotification.h */,
+			);
+			name = Push;
+			sourceTree = "<group>";
+		};
+		33AAB11F1E7DE9C5004DCFFF /* VaultTester */ = {
+			isa = PBXGroup;
+			children = (
+				33AAB1201E7DE9C5004DCFFF /* AppDelegate.h */,
+				33AAB1211E7DE9C5004DCFFF /* AppDelegate.m */,
+				33AAB1261E7DE9C5004DCFFF /* ViewController.h */,
+				33AAB1271E7DE9C5004DCFFF /* ViewController.m */,
+				33AAB1291E7DE9C5004DCFFF /* Assets.xcassets */,
+				33AAB12B1E7DE9C5004DCFFF /* Main.storyboard */,
+				33AAB12E1E7DE9C5004DCFFF /* Info.plist */,
+				33AAB1231E7DE9C5004DCFFF /* Supporting Files */,
+			);
+			path = VaultTester;
+			sourceTree = "<group>";
+		};
+		33AAB1231E7DE9C5004DCFFF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				33AAB1241E7DE9C5004DCFFF /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		33AAB1321E7DEE42004DCFFF /* Transcational Management */ = {
+			isa = PBXGroup;
+			children = (
+				33EE76E01E7251D20040DB8F /* CVt_ResourceManagment.c */,
+				33EE76E11E7251D20040DB8F /* CVt_ResourceManagment.h */,
+				33EE76E61E726FAE0040DB8F /* CVt_ResourceManagment_Priv.h */,
+				3369ED3F1E49732B00C5D179 /* CVtCloudTranscation.c */,
+				33EE76D91E7235F20040DB8F /* CVtCloudTranscation_Priv.h */,
+				3369ED401E49732B00C5D179 /* CVtCloudTranscation.h */,
+				33683E2A1E6E917900FF763F /* CVtEventualMerger.c */,
+				33683E2B1E6E917900FF763F /* CVtEventualMerger.h */,
+			);
+			name = "Transcational Management";
+			sourceTree = "<group>";
+		};
+		33AAB1331E7DEE56004DCFFF /* Encrypted Database */ = {
+			isa = PBXGroup;
+			children = (
+				33E8865B1DF037F600C2833D /* EncryptionBlocker.c */,
+				33E8865C1DF037F600C2833D /* EncryptionBlocker.h */,
+				33E886591DF037D400C2833D /* DeltaPager.c */,
+				33E8865A1DF037D400C2833D /* DeltaPager.h */,
+				335FC7BE1E23752F0064A60A /* DeltaPager_Priv.h */,
+			);
+			name = "Encrypted Database";
+			sourceTree = "<group>";
+		};
+		33AAB1351E7DEE96004DCFFF /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				3369ED481E49C5B000C5D179 /* CVtNetworkStack.c */,
+				3369ED491E49C5B000C5D179 /* CVtNetworkStack.h */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		33AAB1371E7DEEBD004DCFFF /* File Management */ = {
+			isa = PBXGroup;
+			children = (
+				33ABA00F1E54097300D812B5 /* CVt_LocalJournal.c */,
+				33ABA0101E54097300D812B5 /* CVt_LocalJournal.h */,
+				33ABA0131E5415AD00D812B5 /* CVt_FileManagement.c */,
+				33ABA0141E5415AD00D812B5 /* CVt_FileManagement.h */,
+			);
+			name = "File Management";
+			sourceTree = "<group>";
+		};
+		33AAB1381E7DEECD004DCFFF /* Backbone */ = {
+			isa = PBXGroup;
+			children = (
+				33AAB1371E7DEEBD004DCFFF /* File Management */,
+				335428791E148B8D00A78F03 /* Random Cipher */,
+				33AAB1351E7DEE96004DCFFF /* Networking */,
+			);
+			name = Backbone;
+			sourceTree = "<group>";
+		};
+		33AAB1391E7DEEF2004DCFFF /* User Login */ = {
+			isa = PBXGroup;
+			children = (
+				33AAB13A1E7DEF36004DCFFF /* CVtUserManagment.c */,
+				33AAB13B1E7DEF36004DCFFF /* CVtUserManagment.h */,
+			);
+			name = "User Login";
+			sourceTree = "<group>";
+		};
 		33E886501DF0379A00C2833D = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +553,7 @@
 				33FECD7B1E1863DA009D5959 /* Decryptor */,
 				335FC7B71E2372630064A60A /* databaseMerger */,
 				3300933E1E24A32E00878AA4 /* SampleFisherLinearClassifier */,
+				33AAB11F1E7DE9C5004DCFFF /* VaultTester */,
 				33E886621DF0389600C2833D /* Products */,
 				33E8866C1DF038BC00C2833D /* Frameworks */,
 			);
@@ -292,6 +568,8 @@
 				33FECD7A1E1863DA009D5959 /* Decryptor */,
 				335FC7B61E2372630064A60A /* databaseMerger */,
 				3300933D1E24A32E00878AA4 /* SampleFisherLinearClassifier */,
+				33EE76CF1E6FD2230040DB8F /* libmicrojson.a */,
+				33AAB11E1E7DE9C4004DCFFF /* VaultTester.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -309,6 +587,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		33EE76BC1E6FD20E0040DB8F /* microjson-1.3 */ = {
+			isa = PBXGroup;
+			children = (
+				33EE76BD1E6FD20E0040DB8F /* control */,
+				33EE76BE1E6FD20E0040DB8F /* COPYING */,
+				33EE76BF1E6FD20E0040DB8F /* example1.c */,
+				33EE76C01E6FD20E0040DB8F /* example2.c */,
+				33EE76C11E6FD20E0040DB8F /* example3.c */,
+				33EE76D61E6FD2A70040DB8F /* gpsd_config.h */,
+				33EE76C21E6FD20E0040DB8F /* json.c */,
+				33EE76C31E6FD20E0040DB8F /* Makefile */,
+				33EE76C41E6FD20E0040DB8F /* microjson.asc */,
+				33EE76C51E6FD20E0040DB8F /* mjson.asc */,
+				33EE76C61E6FD20E0040DB8F /* mjson.c */,
+				33EE76C71E6FD20E0040DB8F /* mjson.h */,
+				33EE76C81E6FD20E0040DB8F /* NEWS */,
+				33EE76C91E6FD20E0040DB8F /* README */,
+				33EE76CA1E6FD20E0040DB8F /* test_microjson.c */,
+			);
+			path = "microjson-1.3";
+			sourceTree = "<group>";
+		};
 		33FECD7B1E1863DA009D5959 /* Decryptor */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,12 +624,38 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				337432A81E669A96003B09D6 /* CVtPlatformCode_NetworkDarwinHelper.h in Headers */,
+				33ABA0161E5415AD00D812B5 /* CVt_FileManagement.h in Headers */,
 				3300934A1E24B7F000878AA4 /* CVPerceptron.h in Headers */,
 				33E8866A1DF038A900C2833D /* DeltaPager.h in Headers */,
 				3354287D1E148C0C00A78F03 /* RandomCipher.h in Headers */,
+				3363C5F41E6BD06600BF84AD /* base64.h in Headers */,
 				335ACB8B1E14F0AD00E5136B /* CVtKeyManagment.h in Headers */,
+				33ABA0121E54097300D812B5 /* CVt_LocalJournal.h in Headers */,
 				335ACB9D1E15EBD100E5136B /* CloudVault.h in Headers */,
+				33EE76E41E7251D20040DB8F /* CVt_ResourceManagment.h in Headers */,
+				3369ED461E49AF1E00C5D179 /* CVtPlatformCode_Network.h in Headers */,
 				33E8866B1DF038AE00C2833D /* EncryptionBlocker.h in Headers */,
+				337999021E5D063C004A125C /* CVtPlatformCode_Encryption.h in Headers */,
+				33683E291E6E8D0C00FF763F /* CVtPlatformCode_PushNotification.h in Headers */,
+				3363C5F81E6BEEB600BF84AD /* CVtKeychain.h in Headers */,
+				3369ED4B1E49C5B000C5D179 /* CVtNetworkStack.h in Headers */,
+				3369ED421E49732B00C5D179 /* CVtCloudTranscation.h in Headers */,
+				33683E2D1E6E917900FF763F /* CVtEventualMerger.h in Headers */,
+				33EE76DE1E7237D00040DB8F /* CVtPlatformCode_NearbySync.h in Headers */,
+				33AAB13D1E7DEF36004DCFFF /* CVtUserManagment.h in Headers */,
+				33ABA01A1E54310900D812B5 /* CVtPlatformCode_Threading.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		33EE76CD1E6FD2230040DB8F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33EE76DF1E7237D00040DB8F /* CVtPlatformCode_NearbySync.h in Headers */,
+				33EE76E51E7251D20040DB8F /* CVt_ResourceManagment.h in Headers */,
+				33EE76D71E6FD2A70040DB8F /* gpsd_config.h in Headers */,
+				33EE76D51E6FD2360040DB8F /* mjson.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +731,23 @@
 			productReference = 335FC7B61E2372630064A60A /* databaseMerger */;
 			productType = "com.apple.product-type.tool";
 		};
+		33AAB11D1E7DE9C4004DCFFF /* VaultTester */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33AAB1311E7DE9C5004DCFFF /* Build configuration list for PBXNativeTarget "VaultTester" */;
+			buildPhases = (
+				33AAB11A1E7DE9C4004DCFFF /* Sources */,
+				33AAB11B1E7DE9C4004DCFFF /* Frameworks */,
+				33AAB11C1E7DE9C4004DCFFF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VaultTester;
+			productName = VaultTester;
+			productReference = 33AAB11E1E7DE9C4004DCFFF /* VaultTester.app */;
+			productType = "com.apple.product-type.application";
+		};
 		33E886601DF0389600C2833D /* CloudValue_Sqlite */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 33E886631DF0389600C2833D /* Build configuration list for PBXNativeTarget "CloudValue_Sqlite" */;
@@ -421,6 +764,23 @@
 			productName = CloudValue_Sqlite;
 			productReference = 33E886611DF0389600C2833D /* libCloudValue_Sqlite.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
+		};
+		33EE76CE1E6FD2230040DB8F /* microjson */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33EE76D01E6FD2230040DB8F /* Build configuration list for PBXNativeTarget "microjson" */;
+			buildPhases = (
+				33EE76CB1E6FD2230040DB8F /* Sources */,
+				33EE76CC1E6FD2230040DB8F /* Frameworks */,
+				33EE76CD1E6FD2230040DB8F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = microjson;
+			productName = microjson;
+			productReference = 33EE76CF1E6FD2230040DB8F /* libmicrojson.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 		33FECD791E1863DA009D5959 /* Decryptor */ = {
 			isa = PBXNativeTarget;
@@ -464,8 +824,16 @@
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
+					33AAB11D1E7DE9C4004DCFFF = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
+					};
 					33E886601DF0389600C2833D = {
 						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+					};
+					33EE76CE1E6FD2230040DB8F = {
+						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
 					};
 					33FECD791E1863DA009D5959 = {
@@ -480,6 +848,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 33E886501DF0379A00C2833D;
 			productRefGroup = 33E886621DF0389600C2833D /* Products */;
@@ -492,9 +861,23 @@
 				33FECD791E1863DA009D5959 /* Decryptor */,
 				335FC7B51E2372630064A60A /* databaseMerger */,
 				3300933C1E24A32E00878AA4 /* SampleFisherLinearClassifier */,
+				33EE76CE1E6FD2230040DB8F /* microjson */,
+				33AAB11D1E7DE9C4004DCFFF /* VaultTester */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		33AAB11C1E7DE9C4004DCFFF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33AAB12A1E7DE9C5004DCFFF /* Assets.xcassets in Resources */,
+				33AAB12D1E7DE9C5004DCFFF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		330093391E24A32E00878AA4 /* Sources */ = {
@@ -531,16 +914,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		33AAB11A1E7DE9C4004DCFFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33AAB1281E7DE9C5004DCFFF /* ViewController.m in Sources */,
+				33AAB1251E7DE9C5004DCFFF /* main.m in Sources */,
+				33AAB1221E7DE9C5004DCFFF /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		33E8865D1DF0389600C2833D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				337999011E5D063C004A125C /* CVtPlatformCode_Encryption.c in Sources */,
+				33ABA0151E5415AD00D812B5 /* CVt_FileManagement.c in Sources */,
+				3363C5F21E6BD04F00BF84AD /* base64.c in Sources */,
 				335ACB8A1E14F0AD00E5136B /* CVtKeyManagment.c in Sources */,
+				33EE76E21E7251D20040DB8F /* CVt_ResourceManagment.c in Sources */,
 				33E886661DF0389F00C2833D /* EncryptionBlocker.c in Sources */,
-				335FC7CD1E244F7A0064A60A /* sqlite3.c in Sources */,
+				3369ED451E49AF1E00C5D179 /* CVtPlatformCode_Network.c in Sources */,
+				337432A91E669A96003B09D6 /* CVtPlatformCode_NetworkDarwinHelper.m in Sources */,
+				33683E2C1E6E917900FF763F /* CVtEventualMerger.c in Sources */,
+				33ABA0111E54097300D812B5 /* CVt_LocalJournal.c in Sources */,
+				3369ED411E49732B00C5D179 /* CVtCloudTranscation.c in Sources */,
+				33AAB13C1E7DEF36004DCFFF /* CVtUserManagment.c in Sources */,
+				33ABA0191E54310900D812B5 /* CVtPlatformCode_Threading.c in Sources */,
 				3354287C1E148C0C00A78F03 /* RandomCipher.c in Sources */,
+				3369ED4A1E49C5B000C5D179 /* CVtNetworkStack.c in Sources */,
 				33E886681DF0389F00C2833D /* DeltaPager.c in Sources */,
+				3363C5F71E6BEEB600BF84AD /* CVtKeychain.c in Sources */,
+				33683E281E6E8D0C00FF763F /* CVtPlatformCode_PushNotification.c in Sources */,
 				330093491E24B7F000878AA4 /* CVPerceptron.c in Sources */,
+				33EE76DC1E7237D00040DB8F /* CVtPlatformCode_NearbySync.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		33EE76CB1E6FD2230040DB8F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33EE76E31E7251D20040DB8F /* CVt_ResourceManagment.c in Sources */,
+				33EE76D31E6FD22E0040DB8F /* json.c in Sources */,
+				33EE76D41E6FD22E0040DB8F /* mjson.c in Sources */,
+				33EE76DD1E7237D00040DB8F /* CVtPlatformCode_NearbySync.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +979,17 @@
 			targetProxy = 335ACB9A1E15D14200E5136B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		33AAB12B1E7DE9C5004DCFFF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				33AAB12C1E7DE9C5004DCFFF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		330093411E24A32E00878AA4 /* Debug */ = {
@@ -923,6 +1352,105 @@
 			};
 			name = Release;
 		};
+		33AAB12F1E7DE9C5004DCFFF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = VaultTester/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = WMC.VaultTester;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		33AAB1301E7DE9C5004DCFFF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = VaultTester/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = WMC.VaultTester;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		33E886551DF0379A00C2833D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1014,6 +1542,97 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		33EE76D11E6FD2230040DB8F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXECUTABLE_PREFIX = lib;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		33EE76D21E6FD2230040DB8F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_PREFIX = lib;
@@ -1160,6 +1779,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		33AAB1311E7DE9C5004DCFFF /* Build configuration list for PBXNativeTarget "VaultTester" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33AAB12F1E7DE9C5004DCFFF /* Debug */,
+				33AAB1301E7DE9C5004DCFFF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		33E886541DF0379A00C2833D /* Build configuration list for PBXProject "CloudVault" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1174,6 +1801,15 @@
 			buildConfigurations = (
 				33E886641DF0389600C2833D /* Debug */,
 				33E886651DF0389600C2833D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		33EE76D01E6FD2230040DB8F /* Build configuration list for PBXNativeTarget "microjson" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33EE76D11E6FD2230040DB8F /* Debug */,
+				33EE76D21E6FD2230040DB8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

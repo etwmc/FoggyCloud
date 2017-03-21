@@ -51,7 +51,8 @@ SecKeyRef keyFromChar(const char *key, unsigned int keySize) {
     
     return keyRef;
 }
-CFDataRef convertSecKeyToData(SecKeyRef key, SecExternalFormat externalFormat) {
+
+CFDataRef convertAESSecKeyToData(SecKeyRef key, SecExternalFormat externalFormat) {
     CFMutableArrayRef keyUsage = CFArrayCreateMutable(
                                                       kCFAllocatorDefault,
                                                       0,
@@ -84,7 +85,50 @@ CFDataRef convertSecKeyToData(SecKeyRef key, SecExternalFormat externalFormat) {
     params.keyAttributes = keyAttributes;
     
     int flags = 0;
-    CFDataRef pkdata;
+    CFDataRef pkdata = NULL;
+    OSStatus oserr = SecItemExport(key,
+                                   externalFormat, // See SecExternalFormat for details
+                                   flags, // See SecItemImportExportFlags for details
+                                   &params,
+                                   (CFDataRef *)&pkdata);
+    CFRelease(keyUsage);
+    CFRelease(keyAttributes);
+    return pkdata;
+}
+CFDataRef convertRSASecKeyToData(SecKeyRef key, SecExternalFormat externalFormat) {
+    CFMutableArrayRef keyUsage = CFArrayCreateMutable(
+                                                      kCFAllocatorDefault,
+                                                      0,
+                                                      &kCFTypeArrayCallBacks
+                                                      );
+    
+    /* This example sets a lot of usage values.
+     Choose usage values that are appropriate
+     to your specific task. Possible values begin
+     with kSecAttrCan, and are defined in
+     SecItem.h */
+    CFArrayAppendValue(keyUsage, kSecAttrCanEncrypt);
+    CFArrayAppendValue(keyUsage, kSecAttrCanDecrypt);
+    CFArrayAppendValue(keyUsage, kSecAttrCanDerive);
+    CFArrayAppendValue(keyUsage, kSecAttrCanSign);
+    CFArrayAppendValue(keyUsage, kSecAttrCanVerify);
+    CFArrayAppendValue(keyUsage, kSecAttrCanWrap);
+    CFArrayAppendValue(keyUsage, kSecAttrCanUnwrap);
+    CFMutableArrayRef keyAttributes = CFArrayCreateMutable(
+                                                           kCFAllocatorDefault, 0, &kCFTypeArrayCallBacks
+                                                           );
+    SecItemImportExportKeyParameters params;
+    params.version = SEC_KEY_IMPORT_EXPORT_PARAMS_VERSION;
+    params.flags = 0;
+    params.passphrase = NULL;
+    params.alertTitle = NULL;
+    params.alertPrompt = NULL;
+    params.accessRef = NULL;
+    params.keyUsage = keyUsage;
+    params.keyAttributes = keyAttributes;
+    
+    int flags = 0;
+    CFDataRef pkdata = NULL;
     OSStatus oserr = SecItemExport(key,
                                    externalFormat, // See SecExternalFormat for details
                                    flags, // See SecItemImportExportFlags for details
@@ -212,7 +256,7 @@ void generateSymmetricKey(const char *keyBuf, size_t size) {
     SecKeyRef key = SecKeyGenerateSymmetric(encDict, &error);
     
     //Copy key
-    CFDataRef keyData = convertSecKeyToData(key, kSecFormatRawKey);
+    CFDataRef keyData = convertAESSecKeyToData(key, kSecFormatRawKey);
     CFDataGetBytes(keyData, CFRangeMake(0, CFDataGetLength(keyData)), keyBuf);
     CFRelease(encDict);
     CFRelease(keyLen);
@@ -236,9 +280,10 @@ void generateRSAKey(const char *privKey, const char *pubKey, size_t size, size_t
     CFRelease(encDict);
     
     //Copy key
-    //CFDataRef pubKeyData = convertSecKeyToData(pubKey);
-    //CFDataGetBytes(pubKeyData, CFRangeMake(0, CFDataGetLength(pubKeyData)), pubKey);
-    CFDataRef privKeyData = convertSecKeyToData(privKeyRef, kSecFormatPEMSequence);
+    CFDataRef pubKeyData = convertRSASecKeyToData(pubKeyRef, kSecFormatPEMSequence);
+    CFDataGetBytes(pubKeyData, CFRangeMake(0, CFDataGetLength(pubKeyData)), pubKey);
+    *pubKeySize = CFDataGetLength(pubKeyData);
+    CFDataRef privKeyData = convertRSASecKeyToData(privKeyRef, kSecFormatPEMSequence);
     CFDataGetBytes(privKeyData, CFRangeMake(0, CFDataGetLength(privKeyData)), privKey);
     *privKeySize = CFDataGetLength(privKeyData);
     //CFRelease(pubKeyData);

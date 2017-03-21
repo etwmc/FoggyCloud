@@ -27,15 +27,27 @@ extern sqlite3_io_methods encryptedMethod;
 bool fileIsTemp(const char *zName) {
     size_t len = strlen(zName);
     if (zName[len-4] == '-' && zName[len-3] == 'w' && zName[len-2] == 'a' && zName[len-1] == 'l') return true;
-    if (zName[len-8] == '-' && zName[len-7] == 'j' && zName[len-6] == 'o' && zName[len-6] == 'u'&&
-        zName[len-8] == 'r' && zName[len-7] == 'n' && zName[len-6] == 'a' && zName[len-6] == 'l') return true;
+    if (zName[len-8] == '-' && zName[len-7] == 'j' && zName[len-6] == 'o' && zName[len-5] == 'u'&&
+        zName[len-4] == 'r' && zName[len-3] == 'n' && zName[len-2] == 'a' && zName[len-1] == 'l') return true;
     return false;
 }
+
+#define USE_MMAP 1
 
 //Mapping service
 void loadBitmap(encryptFile *file) {
     //Get actual size, so map
     //Because of page schema, the file size will be an integer of the (blockSize * 8)
+    
+#if USE_MMAP
+    
+    int fd = fileno(file->bitMapFile);
+    size_t len = file->actualFileSize/16;
+    ftruncate(fd, len);
+    
+    file->modifiedBit = mmap(NULL, len, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
+    
+#else
     
     fseek(file->bitMapFile, 0, SEEK_SET);
     size_t ret = fread(file->modifiedBit, sizeof(bool), file->actualFileSize/16, file->bitMapFile);
@@ -44,21 +56,43 @@ void loadBitmap(encryptFile *file) {
         for (int i = ret; i < file->actualFileSize/16; i++)
             file->modifiedBit[i] = false;
     }
+#endif
     file->bitDirty = false;
 }
 
 void saveBitmap(encryptFile *file) {
     //Get actual size, so map
     //Because of page schema, the file size will be an integer of the (blockSize * 8)
+#if USE_MMAP
+    int err = msync(file->modifiedBit, file->actualFileSize/16, MS_SYNC);
+#else
     if (file->bitDirty) {
         fseek(file->bitMapFile, 0, SEEK_SET);
         fwrite(file->modifiedBit, sizeof(bool), file->actualFileSize/16, file->bitMapFile);
         fflush(file->bitMapFile);
         file->bitDirty = false;
     }
+#endif
+    fflush(file->bitMapFile);
 }
 
 void growBitmap(encryptFile *file, sqlite_int64 newSize) {
+    if (ftruncate(fileno(file->bitMapFile), newSize/16) != 0) {
+        file->bitDirty = true;
+    }
+#if USE_MMAP
+    msync(file->modifiedBit, file->actualFileSize/16, MS_SYNC);
+    munmap(file->modifiedBit, file->actualFileSize/16);
+    //Reload file
+    fclose(file->bitMapFile);
+    char newAddr[4096];
+    bcopy(file->addr, newAddr, strlen(file->addr));
+    bcopy(".map", newAddr+strlen(file->addr), 5);
+    file->bitMapFile = fopen(newAddr, "r+");
+    int fd = fileno(file->bitMapFile);
+    size_t len = newSize/16;
+    file->modifiedBit = mmap(NULL, len, PROT_READ|PROT_WRITE, MAP_SHARED, fd, 0);
+#else
     bool *newVector = malloc(sizeof(bool)*newSize/16);
     bcopy(file->modifiedBit, newVector, file->actualFileSize/16);
     for (sqlite_int64 j = file->actualFileSize/16; j < newSize/16; j++) {
@@ -66,11 +100,7 @@ void growBitmap(encryptFile *file, sqlite_int64 newSize) {
     }
     free(file->modifiedBit);
     file->modifiedBit = newVector;
-    
-    if (ftruncate(fileno(file->bitMapFile), newSize/16) != 0) {
-        file->bitDirty = true;
-    }
-    
+#endif
 }
 
 void updateBitmap(encryptFile *file, sqlite_int64 offset, int amount) {
@@ -82,6 +112,16 @@ void updateBitmap(encryptFile *file, sqlite_int64 offset, int amount) {
         if (!file->bitDirty && bit[i+offsetDiv4] != true) file->bitDirty = true;
         bit[i+offsetDiv4] = true;
     }
+}
+
+void closeBitmap(encryptFile *file) {
+    //Fill the section
+    bool *bit = file->modifiedBit;
+#if USE_MMAP
+    munmap(file->modifiedBit, file->actualFileSize/16);
+#else
+    free(bit);
+#endif
 }
 
 //Put the original ciphertext (unmodified) back to the ciphertext(readed ciphertext)
@@ -141,18 +181,18 @@ int encryptOpen(sqlite3_vfs* vfs, const char *zName, sqlite3_file* file, int fla
         ((encryptFile*)file)->modifiedBit = malloc(sizeof(bool)*((encryptFile*)file)->actualFileSize/4);
         bzero(((encryptFile*)file)->modifiedBit, ((encryptFile*)file)->actualFileSize/4);
         bcopy(".map", newAddr+strlen(zName), 5);
-        FILE *f = fopen(newAddr, "r");
+        FILE *f = fopen(newAddr, "r+");
         if (f == NULL) {
             //Init file
             f = fopen(newAddr, "w");
             fclose(f);
-            f = fopen(newAddr, "r");
+            f = fopen(newAddr, "r+");
         }
         ((encryptFile*)file)->bitMapFile = f;
         loadBitmap(file);
-        f = fopen(newAddr, "r+");
-        ((encryptFile*)file)->bitMapFile = f;
-        saveBitmap(file);
+        //f = fopen(newAddr, "r+");
+        //((encryptFile*)file)->bitMapFile = f;
+        //saveBitmap(file);
         
         ((encryptFile*)file)->modifyFile = deltaFile;
         
@@ -290,12 +330,12 @@ int encryptedClose(sqlite3_file *file) {
     }
     int state = underlyingFile->pMethods->xClose(underlyingFile);
     state |= modifingFile->pMethods->xClose(modifingFile);
+    closeBitmap(file);
     fclose(((encryptFile*)file)->bitMapFile);
     
     //Free memory
     free(underlyingFile);
     free(modifingFile);
-    free(((encryptFile*)file)->modifiedBit);
     free(((encryptFile*)file)->key);
     
     //Merging

@@ -29,10 +29,20 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>VaultTester.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>databaseMerger.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>4</integer>
+		</dict>
+		<key>microjson.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -57,7 +67,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>33AAB11D1E7DE9C4004DCFFF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>33E886601DF0389600C2833D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>33EE76CE1E6FD2230040DB8F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
